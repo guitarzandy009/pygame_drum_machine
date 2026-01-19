@@ -1,4 +1,4 @@
-# Timestamp 26:01
+# Timestamp 40:20
 
 import pygame
 from pygame import mixer
@@ -11,24 +11,30 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('Beat Machine')
 label_font = pygame.font.Font('freesansbold.ttf', 32)
 
-fps = 60
-timer = pygame.time.Clock()
-beats = 8
-instruments = 6
-boxes = []
-clicked = [[-1 for _ in range(beats)] for _ in range(instruments)]
-  
 # Colors
 black = (0, 0, 0)
 white = (255, 255, 255)
 gray = (128, 128, 128)
 green = (0, 255, 0)
 gold = (212, 175, 55)
+blue = (0, 255, 255)
 
 # Game loop
 run = True
 
-def  draw_grid(clicked):
+fps = 60
+timer = pygame.time.Clock()
+beats = 8
+instruments = 6
+boxes = []
+clicked = [[-1 for _ in range(beats)] for _ in range(instruments)]
+bpm = 240
+playing = True
+active_length = 0
+active_beat = 0
+beat_changed = True
+
+def  draw_grid(clicks, beat):
     left_box = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 200], 5)
     bottom_box = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 5)
     boxes = []
@@ -51,7 +57,7 @@ def  draw_grid(clicked):
 
     for i in range(beats):
         for j in range(instruments):
-            if clicked[j][i] == -1:
+            if clicks[j][i] == -1:
                 color = gray
             else:
                 color = green
@@ -63,13 +69,15 @@ def  draw_grid(clicked):
             pygame.draw.rect(screen, black, [i * ((WIDTH - 200) // beats) + 200, (j * 100),
                                                     ((WIDTH - 200) // beats), ((HEIGHT - 200)//instruments)], 2, 5)
             boxes.append((rect, (i, j)))
+
+        active = pygame.draw.rect(screen, blue, [beat * ((WIDTH - 200)//beats) + 200, 0, ((WIDTH - 200)//beats), instruments * 100], 5, 3)
     return boxes
 
 run = True
 while run:
     timer.tick(fps)
     screen.fill(black)
-    boxes = draw_grid(clicked)
+    boxes = draw_grid(clicked, active_beat)
 
     
     for event in pygame.event.get():
@@ -81,6 +89,19 @@ while run:
                     coords = boxes[i][1]
                     clicked[coords[1]][coords[0]] *= -1
 
+    beat_length = 3600 // bpm
+
+    if playing:
+        if active_length < beat_length:
+            active_length += 1
+        else:
+            active_length = 0
+            if active_beat < beats -1:
+                active_beat += 1
+                beat_changed = True
+            else:
+                active_beat = 0
+                beat_changed = True
 
     pygame.display.flip()
 
