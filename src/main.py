@@ -34,6 +34,22 @@ active_length = 0
 active_beat = 0
 beat_changed = True
 
+# sounds
+'''
+hi_hat = mixer.Sound('/project/beatMaker/sounds/kit2/hi hat.wav')
+snare = mixer.Sound('/project/beatMaker/sounds/kit2/snare.wav')
+kick = mixer.Sound('/project/beatMaker/sounds/kit2/kick.wav')
+crash = mixer.Sound('/project/beatMaker/sounds/kit2/crash.wav')
+clap = mixer.Sound('/project/beatMaker/sounds/kit2/clap.wav')
+tom = mixer.Sound("/project/beatMaker/sounds/kit2/tom.wav")
+'''
+hi_hat = mixer.Sound('/project/beatMaker/sounds/hi hat.wav')
+snare = mixer.Sound('/project/beatMaker/sounds/snare.wav')
+kick = mixer.Sound('/project/beatMaker/sounds/kick.wav')
+crash = mixer.Sound('/project/beatMaker/sounds/crash.wav')
+clap = mixer.Sound('/project/beatMaker/sounds/clap.wav')
+tom = mixer.Sound("/project/beatMaker/sounds/tom.wav")
+
 def  draw_grid(clicks, beat):
     left_box = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 200], 5)
     bottom_box = pygame.draw.rect(screen, gray, [0, HEIGHT - 200, WIDTH, 200], 5)
