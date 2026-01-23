@@ -1,4 +1,4 @@
-# Timestamp 40:20
+# Timestamp 55:12
 
 import pygame
 from pygame import mixer
@@ -34,21 +34,30 @@ active_length = 0
 active_beat = 0
 beat_changed = True
 
-# sounds
-'''
-hi_hat = mixer.Sound('/project/beatMaker/sounds/kit2/hi hat.wav')
-snare = mixer.Sound('/project/beatMaker/sounds/kit2/snare.wav')
-kick = mixer.Sound('/project/beatMaker/sounds/kit2/kick.wav')
-crash = mixer.Sound('/project/beatMaker/sounds/kit2/crash.wav')
-clap = mixer.Sound('/project/beatMaker/sounds/kit2/clap.wav')
-tom = mixer.Sound("/project/beatMaker/sounds/kit2/tom.wav")
-'''
-hi_hat = mixer.Sound('/project/beatMaker/sounds/hi hat.wav')
-snare = mixer.Sound('/project/beatMaker/sounds/snare.wav')
-kick = mixer.Sound('/project/beatMaker/sounds/kick.wav')
-crash = mixer.Sound('/project/beatMaker/sounds/crash.wav')
-clap = mixer.Sound('/project/beatMaker/sounds/clap.wav')
-tom = mixer.Sound("/project/beatMaker/sounds/tom.wav")
+# sounds 
+hi_hat = mixer.Sound('project/beatMaker/sounds/hi hat.WAV')
+snare = mixer.Sound('project/beatMaker/sounds/snare.WAV')
+kick = mixer.Sound('project/beatMaker/sounds/kick.WAV')
+crash = mixer.Sound('project/beatMaker/sounds/crash.wav')
+clap = mixer.Sound('project/beatMaker/sounds/clap.wav')
+tom = mixer.Sound('project/beatMaker/sounds/kit2/tom.wav')  # Using kit2 since main folder doesn't have tom
+
+
+def play_notes():
+    for i in range(len(clicked)):
+        if clicked[i][active_beat] == 1:
+            if i == 0:
+                hi_hat.play()
+            if i == 1:
+                snare.play()
+            if i == 2:
+                kick.play()
+            if i == 3:
+                crash.play()
+            if i == 4:
+                clap.play()
+            if i == 5:
+                tom.play()                                
 
 def  draw_grid(clicks, beat):
     left_box = pygame.draw.rect(screen, gray, [0, 0, 200, HEIGHT - 200], 5)
@@ -94,7 +103,9 @@ while run:
     timer.tick(fps)
     screen.fill(black)
     boxes = draw_grid(clicked, active_beat)
-
+    if beat_changed:
+        play_notes()
+        beat_changed = False
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
