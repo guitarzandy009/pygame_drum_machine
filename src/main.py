@@ -146,6 +146,10 @@ while run:
                     playing = False
                 elif not playing:
                     playing = True
+            elif bpm_add_rect.collidepoint(event.pos):
+                bpm += 5
+            elif bpm_sub_rect.collidepoint(event.pos):
+                bpm -= 5
  
     beat_length = 3600 // bpm
 
