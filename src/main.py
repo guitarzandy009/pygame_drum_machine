@@ -114,19 +114,31 @@ while run:
     else:
         play_text2 = medium_font.render('Paused', True, dark_gray)
     screen.blit(play_text2, (70, HEIGHT - 100))
-    # bpm stuff
+    
+    # beats per minute buttons
     bpm_rect = pygame.draw.rect(screen, gray, [300, HEIGHT - 150, 200, 100], 5, 5)
-    bpm_text = medium_font.render('BPM', True, white)
+    bpm_text = medium_font.render('Beats Per Minute', True, white)
     screen.blit(bpm_text, (308, HEIGHT - 130))
     bpm_text2 = label_font.render(f'{bpm}', True, white)
     screen.blit(bpm_text2, (370, HEIGHT - 100))
     bpm_add_rect = pygame.draw.rect(screen, gray, [510, HEIGHT - 150, 48, 48], 0, 5)
     bpm_sub_rect = pygame.draw.rect(screen, gray, [510, HEIGHT - 100, 48, 48], 0, 5)
     add_text = medium_font.render('+5', True, white)
-    sub_text = medium_font.render('-5', True, white)
     screen.blit(add_text, (520, HEIGHT - 140))
+    sub_text = medium_font.render('-5', True, white)
     screen.blit(sub_text, (520, HEIGHT - 90))
-    
+    # beats per loop buttons
+    beats_rect = pygame.draw.rect(screen, gray, [600, HEIGHT - 150, 200, 100], 5, 5)
+    beats_text = medium_font.render('Beats In Loop', True, white)
+    screen.blit(beats_text, (612, HEIGHT - 130))
+    beats_text2 = label_font.render(f'{beats}', True, white)
+    screen.blit(beats_text2, (670, HEIGHT - 100))
+    beats_add_rect = pygame.draw.rect(screen, gray, [810, HEIGHT - 150, 48, 48], 0, 5)
+    beats_sub_rect = pygame.draw.rect(screen, gray, [810, HEIGHT - 100, 48, 48], 0, 5)
+    add_text2 = medium_font.render('+1', True, white)
+    screen.blit(add_text2, (820, HEIGHT - 140))
+    sub_text2 = medium_font.render('-1', True, white)
+    screen.blit(sub_text2, (820, HEIGHT - 90))
 
     if beat_changed:
         play_notes()
