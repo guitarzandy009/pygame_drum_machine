@@ -1,4 +1,4 @@
-# Timestamp 105:00
+# Timestamp 116:00
 
 import pygame
 from pygame import mixer
@@ -117,7 +117,7 @@ while run:
     
     # beats per minute buttons
     bpm_rect = pygame.draw.rect(screen, gray, [300, HEIGHT - 150, 200, 100], 5, 5)
-    bpm_text = medium_font.render('Beats Per Minute', True, white)
+    bpm_text = medium_font.render('BPM', True, white)
     screen.blit(bpm_text, (308, HEIGHT - 130))
     bpm_text2 = label_font.render(f'{bpm}', True, white)
     screen.blit(bpm_text2, (370, HEIGHT - 100))
@@ -162,6 +162,15 @@ while run:
                 bpm += 5
             elif bpm_sub_rect.collidepoint(event.pos):
                 bpm -= 5
+            elif beats_add_rect.collidepoint(event.pos):
+                beats += 1
+                for i in range(len(clicked)):
+                    clicked[i].append(-1)
+
+            elif beats_sub_rect.collidepoint(event.pos):
+                beats -= 1
+                for i in range(len(clicked)):
+                    clicked[i].pop(-1)
  
     beat_length = 3600 // bpm
 
