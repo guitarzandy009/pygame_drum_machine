@@ -1,4 +1,4 @@
-# Timestamp 
+# Timestamp 1:29:00 
 
 import pygame
 from pygame import mixer
@@ -92,7 +92,7 @@ def  draw_grid(clicks, beat, actives):
                     color = green
                 else:
                     color = dark_gray
-                    
+
             rect = pygame.draw.rect(screen, color, [i * ((WIDTH - 200) // beats) + 205, (j * 100) + 5,
                                                     ((WIDTH - 200) // beats) - 10, ((HEIGHT - 200)//instruments) -10], 0, 3)
             pygame.draw.rect(screen, gold, [i * ((WIDTH - 200) // beats) + 200, (j * 100),
