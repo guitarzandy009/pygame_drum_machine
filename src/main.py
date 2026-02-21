@@ -1,4 +1,4 @@
-# Timestamp 1:29:00 
+# Timestamp 1:32:25 
 
 import pygame
 from pygame import mixer
@@ -148,6 +148,15 @@ while run:
     for i in range(instruments):
         rect = pygame.rect.Rect((0, i * 100), (200, 100))
         instrument_rects.append(rect)
+    # save and load stuff
+    save_button = pygame.draw.rect(screen, gray, [900, HEIGHT - 150, 200, 48], 0, 5)
+    save_text = label_font.render('Save Beat', True, white)
+    screen.blit(save_text, (920, HEIGHT - 140))
+    load_button = pygame.draw.rect(screen, gray, [900, HEIGHT - 100, 200, 48], 0, 5)
+    load_text = label_font.render('Load Beat', True, white)
+    screen.blit(load_text, (920, HEIGHT - 90))
+
+    # clear board
 
     if beat_changed:
         play_notes()
