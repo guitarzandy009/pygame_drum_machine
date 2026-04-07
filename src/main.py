@@ -1,4 +1,4 @@
-# Timestamp 1:49:00 
+# Timestamp 1:51:00 
 
 import pygame
 from pygame import mixer
@@ -113,6 +113,9 @@ def  draw_grid(clicks, beat, actives):
 def draw_save_menu():
     pygame.draw.rect(screen, black, [0, 0,  WIDTH, HEIGHT])
     menu_text = label_font.render('SAVE MENU: Enter a Name for Current Beat', True, white)
+    saving_btn = pygame.draw.rect(screen, gray, [WIDTH // 2 - 200, HEIGHT * 0.75, 400, 100], 0, 5)
+    saving_txt = label_font.render('Save Beat', True, white)
+    screen.blit(saving_txt, (WIDTH // 2 - 70, HEIGHT * 0.75 + 30))  
     screen.blit(menu_text, (400, 40))
     exit_btn = pygame.draw.rect(screen, gray, [WIDTH - 200, HEIGHT - 100, 180, 90], 0, 5)
     exit_test = label_font.render('Close', True, white)
