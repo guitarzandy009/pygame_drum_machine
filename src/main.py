@@ -1,4 +1,4 @@
-# Timestamp 1:51:00 
+# Timestamp 1:59:00 
 
 import pygame
 from pygame import mixer
@@ -42,6 +42,8 @@ saved_beats = []
 file = open('project/beatMaker/saved_beats.txt', 'r')
 for line in file:
     saved_beats.append(line)
+beat_name = ''
+typing = False
 
 # sounds 
 hi_hat = mixer.Sound('project/beatMaker/sounds/kit2/hi hat.wav')
@@ -110,7 +112,7 @@ def  draw_grid(clicks, beat, actives):
         active = pygame.draw.rect(screen, blue, [beat * ((WIDTH - 200)//beats) + 200, 0, ((WIDTH - 200)//beats), instruments * 100], 5, 3)
     return boxes
 
-def draw_save_menu():
+def draw_save_menu(beat_name, typing):
     pygame.draw.rect(screen, black, [0, 0,  WIDTH, HEIGHT])
     menu_text = label_font.render('SAVE MENU: Enter a Name for Current Beat', True, white)
     saving_btn = pygame.draw.rect(screen, gray, [WIDTH // 2 - 200, HEIGHT * 0.75, 400, 100], 0, 5)
@@ -120,7 +122,10 @@ def draw_save_menu():
     exit_btn = pygame.draw.rect(screen, gray, [WIDTH - 200, HEIGHT - 100, 180, 90], 0, 5)
     exit_test = label_font.render('Close', True, white)
     screen.blit(exit_test, (WIDTH - 160, HEIGHT - 70))
-    return exit_btn
+    entry_rect = pygame.draw.rect(screen, gray, [400, 200, 600, 200], 5, 5)
+    entry_text = label_font.render(f'{beat_name}', True, white)
+    screen.blit(entry_text, (430, 250))
+    return exit_btn, saving_btn, entry_rect
 
 def draw_load_menu():
     pygame.draw.rect(screen, black, [0, 0,  WIDTH, HEIGHT])
@@ -189,7 +194,7 @@ while run:
     clear_text = label_font.render('Clear Board', True, white)
     screen.blit(clear_text, (1160, HEIGHT - 120))
     if save_menu:
-        exit_button = draw_save_menu()
+        exit_button, saving_btn, entry_rectangle = draw_save_menu(beat_name, typing)
     if load_menu:
         exit_button = draw_load_menu()
 
@@ -239,7 +244,18 @@ while run:
                 save_menu = False
                 load_menu = False
                 playing = True
-
+                beat_name = ''
+                typing = False
+            if entry_rectangle.collidepoint(event.pos):
+                if typing:
+                    typing = False
+                elif not typing:
+                    typing = True
+        if event.type == pygame.TEXTINPUT and typing:
+            beat_name += event.text
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE and len(beat_name) > 0 and typing:
+                beat_name = beat_name[:-1]
 
     beat_length = 3600 // bpm
 
