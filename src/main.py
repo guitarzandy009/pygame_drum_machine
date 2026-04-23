@@ -1,4 +1,4 @@
-# Timestamp 1:59:00 
+# Timestamp 2:05:00 
 
 import pygame
 from pygame import mixer
@@ -122,6 +122,8 @@ def draw_save_menu(beat_name, typing):
     exit_btn = pygame.draw.rect(screen, gray, [WIDTH - 200, HEIGHT - 100, 180, 90], 0, 5)
     exit_test = label_font.render('Close', True, white)
     screen.blit(exit_test, (WIDTH - 160, HEIGHT - 70))
+    if typing:
+        pygame.draw.rect(screen, dark_gray, [400, 200, 600, 200], 0, 5)
     entry_rect = pygame.draw.rect(screen, gray, [400, 200, 600, 200], 5, 5)
     entry_text = label_font.render(f'{beat_name}', True, white)
     screen.blit(entry_text, (430, 250))
@@ -246,11 +248,20 @@ while run:
                 playing = True
                 beat_name = ''
                 typing = False
-            if entry_rectangle.collidepoint(event.pos):
+            elif entry_rectangle.collidepoint(event.pos):
                 if typing:
                     typing = False
                 elif not typing:
                     typing = True
+            elif saving_btn.collidepoint(event.pos):
+                file = open('saved_beats.txt', 'w')
+                saved_beats.append(f'\nname: {beat_name}, beats: {beats}, bpm: {bpm}, selected: {clicked}')
+                for i in range(len(saved_beats)):
+                    file.write(str(saved_beats[i]))
+                file.close()
+                save_menu = False
+                typing = False
+                beat_name = ''
         if event.type == pygame.TEXTINPUT and typing:
             beat_name += event.text
         if event.type == pygame.KEYDOWN:
