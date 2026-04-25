@@ -1,4 +1,4 @@
-# Timestamp 2:05:00 
+# Timestamp 2:09:00 
 
 import pygame
 from pygame import mixer
@@ -131,10 +131,17 @@ def draw_save_menu(beat_name, typing):
 
 def draw_load_menu():
     pygame.draw.rect(screen, black, [0, 0,  WIDTH, HEIGHT])
+    menu_text = label_font.render('LOAD MENU: Select a Beat to Load', True, white)
+    loading_btn = pygame.draw.rect(screen, gray, [WIDTH // 2 - 200, HEIGHT * 0.75, 400, 100], 0, 5)
+    loading_txt = label_font.render('Load Beat', True, white)
+    screen.blit(loading_txt, (WIDTH // 2 - 70, HEIGHT * 0.75 + 30))
+    delete_btn = pygame.draw.rect(screen, gray, [WIDTH//2 - 500, HEIGHT * 75, 200, 100], 0, 5)
+    delete_txt = label_font.render('Delete Beat')  
+    screen.blit(menu_text, (400, 40))
     exit_btn = pygame.draw.rect(screen, gray, [WIDTH - 200, HEIGHT - 100, 180, 90], 0, 5)
     exit_test = label_font.render('Close', True, white)
     screen.blit(exit_test, (WIDTH - 160, HEIGHT - 70))
-    return exit_btn
+    return exit_btn, loading_btn, delete_btn
 
 
 run = True
