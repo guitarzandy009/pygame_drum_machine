@@ -132,16 +132,17 @@ def draw_save_menu(beat_name, typing):
 def draw_load_menu():
     pygame.draw.rect(screen, black, [0, 0,  WIDTH, HEIGHT])
     menu_text = label_font.render('LOAD MENU: Select a Beat to Load', True, white)
-    loading_btn = pygame.draw.rect(screen, gray, [WIDTH // 2 - 200, HEIGHT * 0.75, 400, 100], 0, 5)
+    loading_btn = pygame.draw.rect(screen, gray, [WIDTH // 2 - 200, HEIGHT * 0.87, 400, 100], 0, 5)
     loading_txt = label_font.render('Load Beat', True, white)
-    screen.blit(loading_txt, (WIDTH // 2 - 70, HEIGHT * 0.75 + 30))
+    screen.blit(loading_txt, (WIDTH // 2 - 70, HEIGHT * 0.87 + 30))
     delete_btn = pygame.draw.rect(screen, gray, [WIDTH//2 - 500, HEIGHT * 0.75, 200, 100], 0, 5)
     delete_txt = label_font.render('Delete Beat', True, white)  
-    screen.blit(delete_txt, ((WIDTH//2) - 485, HEIGHT * 0.75 + 30))
+    screen.blit(delete_txt, ((WIDTH//2) - 485, HEIGHT * 0.87 + 30))
     exit_btn = pygame.draw.rect(screen, gray, [WIDTH - 200, HEIGHT - 100, 180, 90], 0, 5)
     exit_test = label_font.render('Close', True, white)
     screen.blit(exit_test, (WIDTH - 160, HEIGHT - 70))
-    return exit_btn, loading_btn, delete_btn
+    loaded_rectangle = pygame.draw.rect(screen, gray, [190, 90, 1000, 600], 5, 5)
+    return exit_btn, loading_btn, delete_btn, loaded_rectangle
 
 
 run = True
@@ -205,7 +206,7 @@ while run:
     if save_menu:
         exit_button, saving_btn, entry_rectangle = draw_save_menu(beat_name, typing)
     if load_menu:
-        exit_button, load_button, delete_btn = draw_load_menu()
+        exit_button, load_button, delete_btn, loaded_rectangle = draw_load_menu()
 
 
     if beat_changed:
